@@ -211,7 +211,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;o
 </div>
 <div class="toast" id="toast" role="status"></div>
 
-<script id="datos" type="application/json">{"generado": "12/11/2026 08:31", "props": [{"codigo": "AL-33DDG", "titulo": "Dúplex 3 niveles con terraza en Cayma, listo para escriturar", "operacion": "Venta", "tipo": "Casa", "moneda": "US$", "precio": 255000, "distrito": "Cayma", "referencia": "Urb. Monte Rosa", "areaTerreno": null, "areaConstruida": 231, "dorm": 3, "banos": 3, "cocheras": 1, "piso": "3 niveles", "estado": "Disponible", "agencia": "Inmo Arequipa", "video": "", "fotos": ["fotos/AL-33DDG-ad0dd6b14e.jpg", "fotos/AL-33DDG-cc11a1ad31.jpg", "fotos/AL-33DDG-0afac77316.jpg", "fotos/AL-33DDG-af7929495a.jpg", "fotos/AL-33DDG-050d896a76.jpg", "fotos/AL-33DDG-01cfa01472.jpg", "fotos/AL-33DDG-ea22261d28.jpg", "fotos/AL-33DDG-7149f1666e.jpg", "fotos/AL-33DDG-d17fa41a12.jpg", "fotos/AL-33DDG-79403f3612.jpg"], "ficha": "fichas/AL-33DDG.pdf", "masDe30": false, "actualizado": "10/11/2026"}]}</script>
+<script id="datos" type="application/json">{"generado": "12/11/2026 08:37", "props": [{"codigo": "AL-33DDG", "titulo": "Dúplex 3 niveles con terraza en Cayma, listo para escriturar", "operacion": "Venta", "tipo": "Casa", "moneda": "US$", "precio": 255000, "distrito": "Cayma", "referencia": "Urb. Monte Rosa", "areaTerreno": null, "areaConstruida": 231, "dorm": 3, "banos": 3, "cocheras": 1, "piso": "3 niveles", "estado": "Disponible", "agencia": "Inmo Arequipa", "video": "", "fotos": ["fotos/AL-33DDG-ad0dd6b14e.jpg", "fotos/AL-33DDG-cc11a1ad31.jpg", "fotos/AL-33DDG-0afac77316.jpg", "fotos/AL-33DDG-af7929495a.jpg", "fotos/AL-33DDG-050d896a76.jpg", "fotos/AL-33DDG-01cfa01472.jpg", "fotos/AL-33DDG-ea22261d28.jpg", "fotos/AL-33DDG-7149f1666e.jpg", "fotos/AL-33DDG-d17fa41a12.jpg", "fotos/AL-33DDG-79403f3612.jpg"], "ficha": "fichas/AL-33DDG.pdf", "masDe30": false, "actualizado": "10/11/2026"}]}</script>
 <script>
 (function(){
 const D=JSON.parse(document.getElementById("datos").textContent);
@@ -317,11 +317,14 @@ $("modal").addEventListener("click",e=>{if(e.target.id==="modal")cerrar()});
 document.addEventListener("keydown",e=>{if($("modal").hidden)return;if(e.key==="Escape")cerrar();if(actual&&actual.fotos.length>1){if(e.key==="ArrowLeft")ver(idx-1);if(e.key==="ArrowRight")ver(idx+1)}});
 let tx=null;$("modal").addEventListener("touchstart",e=>{if(e.target.closest(".visor"))tx=e.touches[0].clientX},{passive:true});
 $("modal").addEventListener("touchend",e=>{if(tx==null)return;const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>40)ver(idx+(dx<0?1:-1));tx=null});
-async function copiar(t,msg){try{await navigator.clipboard.writeText(t);toast(msg)}catch{toast("Mantén presionado para copiar: "+t)}}
+async function copiar(t,msg){let ok=false;try{await navigator.clipboard.writeText(t);ok=true}catch{}
+  if(!ok){try{const x=document.createElement("textarea");x.value=t;x.setAttribute("readonly","");x.style.cssText="position:fixed;top:0;left:0;opacity:0";document.body.appendChild(x);x.select();ok=document.execCommand("copy");x.remove()}catch{}}
+  toast(ok?msg:"Mantén presionado para copiar: "+t)}
 let tt;function toast(m){const e=$("toast");e.textContent=m;e.classList.add("ver");clearTimeout(tt);tt=setTimeout(()=>e.classList.remove("ver"),2200)}
 
 pintar();
 const h=decodeURIComponent(location.hash.slice(1));if(h)abrir(h);
+addEventListener("hashchange",()=>{const c=decodeURIComponent(location.hash.slice(1));if(c&&(!actual||actual.codigo!==c))abrir(c)});
 })();
 </script>
 </body>

@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#002670">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icons/favicon.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Alianzas ALMAX">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>Alianzas ALMAX Arequipa</title>
 <meta name="description" content="Propiedades compartidas por la red de inmobiliarias Alianzas ALMAX Arequipa.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -211,7 +218,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;o
 </div>
 <div class="toast" id="toast" role="status"></div>
 
-<script id="datos" type="application/json">{"generado": "12/11/2026 08:37", "props": [{"codigo": "AL-33DDG", "titulo": "Dúplex 3 niveles con terraza en Cayma, listo para escriturar", "operacion": "Venta", "tipo": "Casa", "moneda": "US$", "precio": 255000, "distrito": "Cayma", "referencia": "Urb. Monte Rosa", "areaTerreno": null, "areaConstruida": 231, "dorm": 3, "banos": 3, "cocheras": 1, "piso": "3 niveles", "estado": "Disponible", "agencia": "Inmo Arequipa", "video": "", "fotos": ["fotos/AL-33DDG-ad0dd6b14e.jpg", "fotos/AL-33DDG-cc11a1ad31.jpg", "fotos/AL-33DDG-0afac77316.jpg", "fotos/AL-33DDG-af7929495a.jpg", "fotos/AL-33DDG-050d896a76.jpg", "fotos/AL-33DDG-01cfa01472.jpg", "fotos/AL-33DDG-ea22261d28.jpg", "fotos/AL-33DDG-7149f1666e.jpg", "fotos/AL-33DDG-d17fa41a12.jpg", "fotos/AL-33DDG-79403f3612.jpg"], "ficha": "fichas/AL-33DDG.pdf", "masDe30": false, "actualizado": "10/11/2026"}]}</script>
+<script id="datos" type="application/json">{"generado": "12/11/2026 08:40", "props": [{"codigo": "AL-33DDG", "titulo": "Dúplex 3 niveles con terraza en Cayma, listo para escriturar", "operacion": "Venta", "tipo": "Casa", "moneda": "US$", "precio": 255000, "distrito": "Cayma", "referencia": "Urb. Monte Rosa", "areaTerreno": null, "areaConstruida": 231, "dorm": 3, "banos": 3, "cocheras": 1, "piso": "3 niveles", "estado": "Disponible", "agencia": "Inmo Arequipa", "video": "", "fotos": ["fotos/AL-33DDG-ad0dd6b14e.jpg", "fotos/AL-33DDG-cc11a1ad31.jpg", "fotos/AL-33DDG-0afac77316.jpg", "fotos/AL-33DDG-af7929495a.jpg", "fotos/AL-33DDG-050d896a76.jpg", "fotos/AL-33DDG-01cfa01472.jpg", "fotos/AL-33DDG-ea22261d28.jpg", "fotos/AL-33DDG-7149f1666e.jpg", "fotos/AL-33DDG-d17fa41a12.jpg", "fotos/AL-33DDG-79403f3612.jpg"], "ficha": "fichas/AL-33DDG.pdf", "masDe30": false, "actualizado": "10/11/2026"}]}</script>
 <script>
 (function(){
 const D=JSON.parse(document.getElementById("datos").textContent);
@@ -324,6 +331,7 @@ let tt;function toast(m){const e=$("toast");e.textContent=m;e.classList.add("ver
 
 pintar();
 const h=decodeURIComponent(location.hash.slice(1));if(h)abrir(h);
+if("serviceWorker" in navigator)addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
 addEventListener("hashchange",()=>{const c=decodeURIComponent(location.hash.slice(1));if(c&&(!actual||actual.codigo!==c))abrir(c)});
 })();
 </script>

@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Alianzas ALMAX Arequipa</title>
+<meta name="description" content="Propiedades compartidas por la red de inmobiliarias Alianzas ALMAX Arequipa.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Open+Sans:wght@400;600;700&display=swap">
+<style>
+/* Vitrina de solo lectura: cabecera azul ALMAX, filtros, grilla de fichas, ficha ampliada a pantalla completa. */
+:root{
+  --azul:#002670;--azul2:#1d3f8f;--tinta:#14182a;--suave:#5a6178;--fondo:#f2f3f6;--papel:#fff;--linea:#dde1ea;--chip:#e8ecf5;
+  --ok:#2e7d32;--al:#b26a00;
+  --d:"Oswald","Arial Narrow",sans-serif;--t:"Open Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root{--azul:#8fb0ff;--azul2:#b5caff;--tinta:#e8ebf4;--suave:#9aa2b8;--fondo:#0d1222;--papel:#161d31;--linea:#28314a;--chip:#1f2942;--ok:#6cc070;--al:#e0a33a;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--fondo);color:var(--tinta);font:15px/1.5 var(--t)}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
+header{background:#002670;color:#fff;padding-top:env(safe-area-inset-top)}
+header .wrap{padding-block:22px 18px}
+header h1{margin:0;font:600 30px/1.05 var(--d);text-transform:uppercase;letter-spacing:.02em}
+header p{margin:6px 0 0;color:#c9d6ff;font-size:14px;max-width:60ch}
+.aviso{background:var(--papel);border:1px solid var(--linea);border-left:4px solid var(--azul);border-radius:8px;padding:10px 14px;font-size:14px;margin-top:16px}
+.filtros{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 12px}
+.filtros input,.filtros select{font:15px var(--t);color:var(--tinta);background:var(--papel);border:1px solid var(--linea);border-radius:999px;padding:9px 14px;min-width:0}
+.filtros input{flex:1 1 220px}
+.filtros select{flex:0 1 auto}
+.cuenta{color:var(--suave);font-size:13px;margin-bottom:10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;padding-bottom:40px}
+.card{background:var(--papel);border:1px solid var(--linea);border-radius:12px;overflow:hidden;cursor:pointer;text-align:left;padding:0;color:inherit;font:inherit;display:flex;flex-direction:column}
+.card:focus-visible{outline:2px solid var(--azul);outline-offset:2px}
+.foto{aspect-ratio:4/3;background:var(--chip);display:grid;place-items:center;color:var(--suave);font-size:13px;overflow:hidden;position:relative}
+.foto img{width:100%;height:100%;object-fit:cover}
+.n{position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,.6);color:#fff;font-size:12px;padding:2px 8px;border-radius:999px}
+.cuerpo{padding:12px 14px 14px;display:flex;flex-direction:column;gap:4px}
+.precio{font:600 22px var(--d);color:var(--azul);font-variant-numeric:tabular-nums}
+.tit{font-weight:700}
+.meta{color:var(--suave);font-size:13px}
+.pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.pill{font-size:11px;font-weight:700;padding:2px 9px;border-radius:999px;background:var(--chip);color:var(--tinta)}
+.pill.cod{font-family:ui-monospace,Menlo,Consolas,monospace;letter-spacing:.06em;background:transparent;border:1px solid var(--linea);color:var(--azul)}
+.pill.ag{background:#002670;color:#fff}
+.pill.vig{background:#fff3dc;color:#8a5200}
+.pill.res{color:var(--al)}
+.vacio{grid-column:1/-1;background:var(--papel);border:1px dashed var(--linea);border-radius:12px;padding:28px;text-align:center;color:var(--suave)}
+.modal{position:fixed;inset:0;background:var(--fondo);overflow-y:auto;z-index:10;padding-bottom:env(safe-area-inset-bottom)}
+.mtop{position:sticky;top:0;background:var(--papel);border-bottom:1px solid var(--linea);z-index:2;padding-top:env(safe-area-inset-top)}
+.mtop .wrap{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-block:10px}
+.btn{border:1px solid var(--linea);background:var(--papel);color:var(--tinta);border-radius:8px;padding:8px 14px;font:600 14px var(--t);cursor:pointer;text-decoration:none;display:inline-block}
+.btn.az{background:#002670;color:#fff;border-color:#002670}
+.gal{display:flex;align-items:flex-start;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;padding:14px 0}
+.gal img{flex:0 0 min(88%,620px);width:min(88%,620px);height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:10px;scroll-snap-align:start;background:var(--chip)}
+.bloque{background:var(--papel);border:1px solid var(--linea);border-radius:12px;padding:16px;margin-bottom:12px}
+.bloque h3{margin:0 0 10px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--suave)}
+.datos{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px 16px}
+.datos small{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--suave)}
+.datos span{font-weight:700}
+.codbig{font:600 26px ui-monospace,Menlo,Consolas,monospace;letter-spacing:.08em;color:var(--azul);user-select:all}
+footer{color:var(--suave);font-size:12px;text-align:center;padding:10px 0 30px}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <h1>Alianzas ALMAX Arequipa</h1>
+  <p>Propiedades compartidas por las inmobiliarias de la red. Solo para agentes.</p>
+</div></header>
+<main class="wrap">
+  <div class="aviso"><b>¿Te interesa una propiedad?</b> Anota su <b>código</b> (por ejemplo AL-HAWXG) y pásaselo al administrador de tu agencia. Él consulta la disponibilidad y coordina la visita.</div>
+  <div class="filtros">
+    <input id="q" type="search" placeholder="Buscar código, distrito o zona" aria-label="Buscar">
+    <select id="op" aria-label="Operación"><option value="">Venta y alquiler</option><option>Venta</option><option>Alquiler</option><option>Anticresis</option></select>
+    <select id="tipo" aria-label="Tipo"><option value="">Todo tipo</option></select>
+    <select id="dist" aria-label="Distrito"><option value="">Todo distrito</option></select>
+    <select id="ag" aria-label="Inmobiliaria"><option value="">Toda la red</option></select>
+  </div>
+  <div class="cuenta" id="cuenta"></div>
+  <div class="grid" id="grid"></div>
+</main>
+<footer class="wrap" id="pie"></footer>
+<div class="modal" id="modal" hidden>
+  <div class="mtop"><div class="wrap"><b id="mtit">Propiedad</b><button class="btn" id="cerrar" type="button">Cerrar</button></div></div>
+  <div class="wrap" id="mbody"></div>
+</div>
+<script id="datos" type="application/json">{"generado": "11/11/2026 22:54", "props": [{"codigo": "AL-33DDG", "titulo": "Dúplex 3 niveles con terraza en Cayma, listo para escriturar", "operacion": "Venta", "tipo": "Casa", "moneda": "US$", "precio": 255000, "distrito": "Cayma", "referencia": "Urb. Monte Rosa", "areaTerreno": null, "areaConstruida": 231, "dorm": 3, "banos": 3, "cocheras": 1, "piso": "3 niveles", "estado": "Disponible", "agencia": "Inmo Arequipa", "video": "", "fotos": ["fotos/AL-33DDG-01.jpg", "fotos/AL-33DDG-02.jpg", "fotos/AL-33DDG-03.jpg", "fotos/AL-33DDG-04.jpg", "fotos/AL-33DDG-05.jpg", "fotos/AL-33DDG-06.jpg", "fotos/AL-33DDG-07.jpg", "fotos/AL-33DDG-08.jpg", "fotos/AL-33DDG-09.jpg", "fotos/AL-33DDG-10.jpg"], "masDe30": false, "actualizado": "10/11/2026"}]}</script>
+<script>
+(function(){
+const D=JSON.parse(document.getElementById("datos").textContent);
+const $=id=>document.getElementById(id);
+const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmt=p=>p.precio==null?"Precio a consultar":p.moneda+" "+Number(p.precio).toLocaleString("es-PE",{maximumFractionDigits:0})+(p.operacion==="Alquiler"?" al mes":"");
+const st={q:"",op:"",tipo:"",dist:"",ag:""};
+function llenar(id,campo){const vals=[...new Set(D.props.map(p=>p[campo]).filter(Boolean))].sort();$(id).insertAdjacentHTML("beforeend",vals.map(v=>`<option>${esc(v)}</option>`).join(""))}
+llenar("tipo","tipo");llenar("dist","distrito");llenar("ag","agencia");
+["q","op","tipo","dist","ag"].forEach(k=>$(k).addEventListener("input",e=>{st[k]=e.target.value.trim().toLowerCase();pintar()}));
+function pills(p){return `<span class="pill cod">${esc(p.codigo)}</span><span class="pill ag">${esc(p.agencia)}</span>${p.estado==="Reservado"?'<span class="pill res">Reservado</span>':""}${p.masDe30?'<span class="pill vig">Más de 30 días · consultar vigencia</span>':""}${p.video?'<span class="pill">▶ Video</span>':""}`}
+function pintar(){
+  const l=D.props.filter(p=>{
+    if(st.op&&p.operacion.toLowerCase()!==st.op)return false;
+    if(st.tipo&&p.tipo.toLowerCase()!==st.tipo)return false;
+    if(st.dist&&p.distrito.toLowerCase()!==st.dist)return false;
+    if(st.ag&&p.agencia.toLowerCase()!==st.ag)return false;
+    if(st.q&&![p.codigo,p.distrito,p.referencia,p.titulo,p.tipo].join(" ").toLowerCase().includes(st.q))return false;
+    return true});
+  $("cuenta").textContent=l.length+(l.length===1?" propiedad":" propiedades");
+  $("grid").innerHTML=l.length?l.map(p=>`<button class="card" type="button" data-c="${esc(p.codigo)}">
+    <div class="foto">${p.fotos[0]?`<img src="${esc(p.fotos[0])}" alt="" loading="lazy">`:"Sin foto"}${p.fotos.length>1?`<span class="n">${p.fotos.length} fotos</span>`:""}</div>
+    <div class="cuerpo"><div class="precio">${esc(fmt(p))}</div><div class="tit">${esc(p.titulo)}</div>
+    <div class="meta">${esc(p.tipo)} en ${esc(p.operacion.toLowerCase())} · ${esc(p.distrito)}${p.dorm?` · ${esc(p.dorm)} dorm.`:""}${p.areaConstruida||p.areaTerreno?` · ${esc(p.areaConstruida||p.areaTerreno)} m²`:""}</div>
+    <div class="pills">${pills(p)}</div></div></button>`).join(""):`<div class="vacio"><b>No hay propiedades con esos filtros.</b><br>Prueba quitando alguno.</div>`;
+}
+document.addEventListener("click",e=>{const c=e.target.closest("[data-c]");if(c)abrir(c.dataset.c)});
+function dato(k,v){return v||v===0?`<div><small>${k}</small><span>${esc(v)}</span></div>`:""}
+function abrir(cod){
+  const p=D.props.find(x=>x.codigo===cod);if(!p)return;
+  $("mtit").textContent=p.codigo;
+  $("mbody").innerHTML=`${p.fotos.length?`<div class="gal">${p.fotos.map(f=>`<img src="${esc(f)}" alt="" loading="lazy">`).join("")}</div>`:`<div class="foto" style="border-radius:10px;margin:14px 0">Sin fotos</div>`}
+  <div class="bloque"><div class="precio" style="font-size:28px">${esc(fmt(p))}</div><div class="tit" style="font-size:17px">${esc(p.titulo)}</div>
+  <div class="meta">${esc(p.distrito)}${p.referencia?" · "+esc(p.referencia):""}</div><div class="pills">${pills(p)}</div>
+  ${p.video?`<a class="btn az" style="margin-top:12px" href="${esc(p.video)}" target="_blank" rel="noopener noreferrer">▶ Ver video de la propiedad</a>`:""}</div>
+  <div class="bloque"><h3>Ficha técnica</h3><div class="datos">${dato("Tipo",p.tipo)}${dato("Operación",p.operacion)}${dato("Área terreno / total",p.areaTerreno&&p.areaTerreno+" m²")}${dato("Área construida",p.areaConstruida&&p.areaConstruida+" m²")}${dato("Dormitorios",p.dorm)}${dato("Baños",p.banos)}${dato("Cocheras",p.cocheras)}${dato("Piso",p.piso)}${dato("Actualizada",p.actualizado)}</div></div>
+  <div class="bloque"><h3>Para consultar</h3><div class="codbig">${esc(p.codigo)}</div>
+  <p class="meta" style="margin:6px 0 12px">Pásale este código al administrador de tu agencia. Él consulta con ${esc(p.agencia)} y coordina la visita.${p.masDe30?" Esta ficha tiene más de 30 días sin actualizar: pide que confirmen si sigue disponible.":""}</p>
+  <button class="btn" type="button" id="copiar">Copiar código</button></div>`;
+  $("modal").hidden=false;document.body.style.overflow="hidden";$("modal").scrollTop=0;
+  $("copiar").onclick=async()=>{try{await navigator.clipboard.writeText(p.codigo);$("copiar").textContent="Copiado"}catch{$("copiar").textContent="Mantén presionado el código"}};
+  try{history.replaceState(null,"","#"+p.codigo)}catch{}
+}
+function cerrar(){$("modal").hidden=true;document.body.style.overflow="";try{history.replaceState(null,"",location.pathname)}catch{}}
+$("cerrar").onclick=cerrar;document.addEventListener("keydown",e=>{if(e.key==="Escape")cerrar()});
+$("pie").textContent="Actualizado el "+D.generado+" · Red privada Alianzas ALMAX Arequipa";
+pintar();
+const h=location.hash.slice(1);if(h)abrir(h);
+})();
+</script>
+</body>
+</html>

@@ -167,6 +167,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;o
   <symbol id="i-copiar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></symbol>
   <symbol id="i-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></symbol>
   <symbol id="i-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></symbol>
+  <symbol id="i-pdf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></symbol>
   <symbol id="i-lupa" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></symbol>
 </svg>
 
@@ -210,7 +211,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;o
 </div>
 <div class="toast" id="toast" role="status"></div>
 
-<script id="datos" type="application/json">{"generado": "12/11/2026 06:53", "props": [{"codigo": "AL-33DDG", "titulo": "Dúplex 3 niveles con terraza en Cayma, listo para escriturar", "operacion": "Venta", "tipo": "Casa", "moneda": "US$", "precio": 255000, "distrito": "Cayma", "referencia": "Urb. Monte Rosa", "areaTerreno": null, "areaConstruida": 231, "dorm": 3, "banos": 3, "cocheras": 1, "piso": "3 niveles", "estado": "Disponible", "agencia": "Inmo Arequipa", "video": "", "fotos": ["fotos/AL-33DDG-01.jpg", "fotos/AL-33DDG-02.jpg", "fotos/AL-33DDG-03.jpg", "fotos/AL-33DDG-04.jpg", "fotos/AL-33DDG-05.jpg", "fotos/AL-33DDG-06.jpg", "fotos/AL-33DDG-07.jpg", "fotos/AL-33DDG-08.jpg", "fotos/AL-33DDG-09.jpg", "fotos/AL-33DDG-10.jpg"], "masDe30": false, "actualizado": "10/11/2026"}]}</script>
+<script id="datos" type="application/json">{"generado": "12/11/2026 07:30", "props": [{"codigo": "AL-33DDG", "titulo": "Dúplex 3 niveles con terraza en Cayma, listo para escriturar", "operacion": "Venta", "tipo": "Casa", "moneda": "US$", "precio": 255000, "distrito": "Cayma", "referencia": "Urb. Monte Rosa", "areaTerreno": null, "areaConstruida": 231, "dorm": 3, "banos": 3, "cocheras": 1, "piso": "3 niveles", "estado": "Disponible", "agencia": "Inmo Arequipa", "video": "", "fotos": ["fotos/AL-33DDG-ad0dd6b14e.jpg", "fotos/AL-33DDG-cc11a1ad31.jpg", "fotos/AL-33DDG-0afac77316.jpg", "fotos/AL-33DDG-af7929495a.jpg", "fotos/AL-33DDG-050d896a76.jpg", "fotos/AL-33DDG-01cfa01472.jpg", "fotos/AL-33DDG-ea22261d28.jpg", "fotos/AL-33DDG-7149f1666e.jpg", "fotos/AL-33DDG-d17fa41a12.jpg", "fotos/AL-33DDG-79403f3612.jpg"], "ficha": "fichas/AL-33DDG.pdf", "masDe30": false, "actualizado": "10/11/2026"}]}</script>
 <script>
 (function(){
 const D=JSON.parse(document.getElementById("datos").textContent);
@@ -295,7 +296,7 @@ function abrir(cod){
     <div style="display:flex;flex-wrap:wrap;gap:6px"><span class="cap">${esc(p.operacion)}</span><span class="cap gris">${esc(p.tipo)}</span>${estados(p)}<span class="cap gris">${esc(p.agencia)}</span></div>
     <div><div class="precio" style="font-size:30px">${precio(p)}</div><h2>${esc(p.titulo)}</h2><div class="zona" style="margin-top:6px">${ico("pin")}${esc(p.distrito)}${p.referencia?" · "+esc(p.referencia):""}</div></div>
     ${p.masDe30?`<div class="alerta rojo">Esta ficha tiene más de 30 días sin actualizar. Pide que confirmen si sigue disponible.</div>`:p.estado==="Reservado"?`<div class="alerta amarillo">Esta propiedad está reservada. Consulta si aún se puede visitar.</div>`:""}
-    ${p.video?`<div><a class="btn" href="${esc(p.video)}" target="_blank" rel="noopener noreferrer">${ico("play")}Ver video de la propiedad</a></div>`:""}
+    <div style="display:flex;flex-wrap:wrap;gap:8px">${p.ficha?`<a class="btn" href="${esc(p.ficha)}" download="${esc(p.codigo)}.pdf" target="_blank" rel="noopener">${ico("pdf")}Descargar ficha (PDF)</a>`:""}${p.video?`<a class="btn" href="${esc(p.video)}" target="_blank" rel="noopener noreferrer">${ico("play")}Ver video</a>`:""}</div>
     <div class="ficha">${dato("casa","Tipo",p.tipo)}${dato("area","Área terreno / total",p.areaTerreno&&p.areaTerreno+" m²")}${dato("area","Área construida",p.areaConstruida&&p.areaConstruida+" m²")}${dato("cama","Dormitorios",p.dorm)}${dato("bano","Baños",p.banos)}${dato("auto","Cocheras",p.cocheras)}${dato("piso","Piso",p.piso)}${dato("cal","Actualizada",p.actualizado)}</div>
     <div class="consulta"><p>Código para consultar</p><div class="cod">${esc(p.codigo)}</div>
       <p>Pásale este código al administrador de tu agencia. Él consulta con ${esc(p.agencia)} y coordina la visita.</p>

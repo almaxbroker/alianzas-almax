@@ -218,7 +218,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;o
 </div>
 <div class="toast" id="toast" role="status"></div>
 
-<script id="datos" type="application/json">{"generado": "12/11/2026 08:41", "props": [{"codigo": "AL-33DDG", "titulo": "Dúplex 3 niveles con terraza en Cayma, listo para escriturar", "operacion": "Venta", "tipo": "Casa", "moneda": "US$", "precio": 255000, "distrito": "Cayma", "referencia": "Urb. Monte Rosa", "areaTerreno": null, "areaConstruida": 231, "dorm": 3, "banos": 3, "cocheras": 1, "piso": "3 niveles", "estado": "Disponible", "agencia": "Inmo Arequipa", "video": "", "fotos": ["fotos/AL-33DDG-ad0dd6b14e.jpg", "fotos/AL-33DDG-cc11a1ad31.jpg", "fotos/AL-33DDG-0afac77316.jpg", "fotos/AL-33DDG-af7929495a.jpg", "fotos/AL-33DDG-050d896a76.jpg", "fotos/AL-33DDG-01cfa01472.jpg", "fotos/AL-33DDG-ea22261d28.jpg", "fotos/AL-33DDG-7149f1666e.jpg", "fotos/AL-33DDG-d17fa41a12.jpg", "fotos/AL-33DDG-79403f3612.jpg"], "ficha": "fichas/AL-33DDG.pdf", "masDe30": false, "actualizado": "10/11/2026"}]}</script>
+<script id="datos" type="application/json">{"generado": "12/11/2026 12:04", "props": [{"codigo": "AL-33DDG", "titulo": "Dúplex 3 niveles con terraza en Cayma, listo para escriturar", "operacion": "Venta", "tipo": "Casa", "moneda": "US$", "precio": 255000, "distrito": "Cayma", "referencia": "Urb. Monte Rosa", "areaTerreno": null, "areaConstruida": 231, "dorm": 3, "banos": 3, "cocheras": 1, "piso": "3 niveles", "estado": "Disponible", "agencia": "Inmo Arequipa", "video": "", "fotos": ["fotos/AL-33DDG-ad0dd6b14e.jpg", "fotos/AL-33DDG-cc11a1ad31.jpg", "fotos/AL-33DDG-0afac77316.jpg", "fotos/AL-33DDG-af7929495a.jpg", "fotos/AL-33DDG-050d896a76.jpg", "fotos/AL-33DDG-01cfa01472.jpg", "fotos/AL-33DDG-ea22261d28.jpg", "fotos/AL-33DDG-7149f1666e.jpg", "fotos/AL-33DDG-d17fa41a12.jpg", "fotos/AL-33DDG-79403f3612.jpg"], "minis": ["fotos/AL-33DDG-ad0dd6b14e-m.jpg", "fotos/AL-33DDG-cc11a1ad31-m.jpg", "fotos/AL-33DDG-0afac77316-m.jpg", "fotos/AL-33DDG-af7929495a-m.jpg", "fotos/AL-33DDG-050d896a76-m.jpg", "fotos/AL-33DDG-01cfa01472-m.jpg", "fotos/AL-33DDG-ea22261d28-m.jpg", "fotos/AL-33DDG-7149f1666e-m.jpg", "fotos/AL-33DDG-d17fa41a12-m.jpg", "fotos/AL-33DDG-79403f3612-m.jpg"], "ficha": "fichas/AL-33DDG.pdf", "masDe30": false, "actualizado": "10/11/2026"}]}</script>
 <script>
 (function(){
 const D=JSON.parse(document.getElementById("datos").textContent);
@@ -275,7 +275,7 @@ function pintar(){
   $("cuenta").textContent=`${l.length} ${l.length===1?"propiedad":"propiedades"}${filtrando?" con estos filtros":""}`;
   $("limpiar").hidden=!filtrando;
   $("grid").innerHTML=l.length?l.map(p=>`<button class="card" type="button" data-c="${esc(p.codigo)}" aria-label="${esc(p.titulo)}, ${esc(p.codigo)}">
-    <div class="media">${p.fotos[0]?`<img src="${esc(p.fotos[0])}" alt="" loading="lazy" decoding="async">`:`<div class="sinfoto">Sin foto</div>`}
+    <div class="media">${p.fotos[0]?`<img src="${esc((p.minis&&p.minis[0])||p.fotos[0])}" alt="" loading="lazy" decoding="async">`:`<div class="sinfoto">Sin foto</div>`}
       <div class="arriba"><span class="cap">${esc(p.operacion)}</span>${estados(p)}</div>
       <div class="abajo"><span class="cap cod">${esc(p.codigo)}</span><span style="display:flex;gap:6px">${p.video?`<span class="cap fotos">${ico("play").replace('aria-hidden="true"','aria-hidden="true" style="width:11px;height:11px"')}Video</span>`:""}${p.fotos.length>1?`<span class="cap fotos">${p.fotos.length} fotos</span>`:""}</span></div>
     </div>
@@ -298,7 +298,7 @@ function abrir(cod){
   <div class="hoja-top"><b id="mcod">${esc(p.codigo)}</b><button class="btn claro" type="button" id="cerrar">Cerrar ✕</button></div>
   ${p.fotos.length?`<div class="visor"><img id="vimg" src="${esc(p.fotos[0])}" alt="Foto 1 de ${p.fotos.length}">
     ${p.fotos.length>1?`<button class="nav prev" type="button" id="prev" aria-label="Foto anterior">‹</button><button class="nav next" type="button" id="next" aria-label="Foto siguiente">›</button><span class="cap cont" id="vcont">1 / ${p.fotos.length}</span>`:""}</div>
-    ${p.fotos.length>1?`<div class="miniaturas">${p.fotos.map((f,i)=>`<button type="button" data-i="${i}" aria-current="${i===0}" aria-label="Ver foto ${i+1}"><img src="${esc(f)}" alt="" loading="lazy"></button>`).join("")}</div>`:""}`:""}
+    ${p.fotos.length>1?`<div class="miniaturas">${p.fotos.map((f,i)=>`<button type="button" data-i="${i}" aria-current="${i===0}" aria-label="Ver foto ${i+1}"><img src="${esc((p.minis&&p.minis[i])||f)}" alt="" loading="lazy"></button>`).join("")}</div>`:""}`:""}
   <div class="detalle">
     <div style="display:flex;flex-wrap:wrap;gap:6px"><span class="cap">${esc(p.operacion)}</span><span class="cap gris">${esc(p.tipo)}</span>${estados(p)}<span class="cap gris">${esc(p.agencia)}</span></div>
     <div><div class="precio" style="font-size:30px">${precio(p)}</div><h2>${esc(p.titulo)}</h2><div class="zona" style="margin-top:6px">${ico("pin")}${esc(p.distrito)}${p.referencia?" · "+esc(p.referencia):""}</div></div>

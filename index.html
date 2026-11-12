@@ -4,135 +4,322 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#002670">
 <title>Alianzas ALMAX Arequipa</title>
 <meta name="description" content="Propiedades compartidas por la red de inmobiliarias Alianzas ALMAX Arequipa.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Open+Sans:wght@400;600;700&display=swap">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@600;700&display=swap">
 <style>
-/* Vitrina de solo lectura: cabecera azul ALMAX, filtros, grilla de fichas, ficha ampliada a pantalla completa. */
+/* Vitrina de solo lectura. Regla de color: todo lo que es barra, botón o texto en cápsula = azul ALMAX; superficies = blanco;
+   estados = verde (nueva/disponible), amarillo (reservado), rojo (más de 30 días). */
 :root{
-  --azul:#002670;--azul2:#1d3f8f;--tinta:#14182a;--suave:#5a6178;--fondo:#f2f3f6;--papel:#fff;--linea:#dde1ea;--chip:#e8ecf5;
-  --ok:#2e7d32;--al:#b26a00;
-  --d:"Oswald","Arial Narrow",sans-serif;--t:"Open Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --azul:#002670; --azul-2:#0a3a99; --azul-claro:#e9eefb;
+  --blanco:#ffffff; --fondo:#f6f8fc; --tinta:#0f1729; --gris:#5b6478; --linea:#e3e8f2;
+  --verde:#15803d; --verde-bg:#dcfce7; --amarillo:#a16207; --amarillo-bg:#fef3c7; --rojo:#b91c1c; --rojo-bg:#fee2e2;
+  --f-tit:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --f-txt:"Plus Jakarta Sans","Segoe UI",system-ui,sans-serif;
+  --f-cod:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  --sombra:0 1px 2px rgba(15,23,41,.06),0 8px 24px rgba(15,23,41,.06);
+  color-scheme:light;
 }
-@media (prefers-color-scheme:dark){:root{--azul:#8fb0ff;--azul2:#b5caff;--tinta:#e8ebf4;--suave:#9aa2b8;--fondo:#0d1222;--papel:#161d31;--linea:#28314a;--chip:#1f2942;--ok:#6cc070;--al:#e0a33a;color-scheme:dark}}
 *{box-sizing:border-box}
-body{margin:0;background:var(--fondo);color:var(--tinta);font:15px/1.5 var(--t)}
-.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
-header{background:#002670;color:#fff;padding-top:env(safe-area-inset-top)}
-header .wrap{padding-block:22px 18px}
-header h1{margin:0;font:600 30px/1.05 var(--d);text-transform:uppercase;letter-spacing:.02em}
-header p{margin:6px 0 0;color:#c9d6ff;font-size:14px;max-width:60ch}
-.aviso{background:var(--papel);border:1px solid var(--linea);border-left:4px solid var(--azul);border-radius:8px;padding:10px 14px;font-size:14px;margin-top:16px}
-.filtros{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 12px}
-.filtros input,.filtros select{font:15px var(--t);color:var(--tinta);background:var(--papel);border:1px solid var(--linea);border-radius:999px;padding:9px 14px;min-width:0}
-.filtros input{flex:1 1 220px}
-.filtros select{flex:0 1 auto}
-.cuenta{color:var(--suave);font-size:13px;margin-bottom:10px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;padding-bottom:40px}
-.card{background:var(--papel);border:1px solid var(--linea);border-radius:12px;overflow:hidden;cursor:pointer;text-align:left;padding:0;color:inherit;font:inherit;display:flex;flex-direction:column}
-.card:focus-visible{outline:2px solid var(--azul);outline-offset:2px}
-.foto{aspect-ratio:4/3;background:var(--chip);display:grid;place-items:center;color:var(--suave);font-size:13px;overflow:hidden;position:relative}
-.foto img{width:100%;height:100%;object-fit:cover}
-.n{position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,.6);color:#fff;font-size:12px;padding:2px 8px;border-radius:999px}
-.cuerpo{padding:12px 14px 14px;display:flex;flex-direction:column;gap:4px}
-.precio{font:600 22px var(--d);color:var(--azul);font-variant-numeric:tabular-nums}
-.tit{font-weight:700}
-.meta{color:var(--suave);font-size:13px}
-.pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
-.pill{font-size:11px;font-weight:700;padding:2px 9px;border-radius:999px;background:var(--chip);color:var(--tinta)}
-.pill.cod{font-family:ui-monospace,Menlo,Consolas,monospace;letter-spacing:.06em;background:transparent;border:1px solid var(--linea);color:var(--azul)}
-.pill.ag{background:#002670;color:#fff}
-.pill.vig{background:#fff3dc;color:#8a5200}
-.pill.res{color:var(--al)}
-.vacio{grid-column:1/-1;background:var(--papel);border:1px dashed var(--linea);border-radius:12px;padding:28px;text-align:center;color:var(--suave)}
-.modal{position:fixed;inset:0;background:var(--fondo);overflow-y:auto;z-index:10;padding-bottom:env(safe-area-inset-bottom)}
-.mtop{position:sticky;top:0;background:var(--papel);border-bottom:1px solid var(--linea);z-index:2;padding-top:env(safe-area-inset-top)}
-.mtop .wrap{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-block:10px}
-.btn{border:1px solid var(--linea);background:var(--papel);color:var(--tinta);border-radius:8px;padding:8px 14px;font:600 14px var(--t);cursor:pointer;text-decoration:none;display:inline-block}
-.btn.az{background:#002670;color:#fff;border-color:#002670}
-.gal{display:flex;align-items:flex-start;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;padding:14px 0}
-.gal img{flex:0 0 min(88%,620px);width:min(88%,620px);height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:10px;scroll-snap-align:start;background:var(--chip)}
-.bloque{background:var(--papel);border:1px solid var(--linea);border-radius:12px;padding:16px;margin-bottom:12px}
-.bloque h3{margin:0 0 10px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--suave)}
-.datos{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px 16px}
-.datos small{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--suave)}
-.datos span{font-weight:700}
-.codbig{font:600 26px ui-monospace,Menlo,Consolas,monospace;letter-spacing:.08em;color:var(--azul);user-select:all}
-footer{color:var(--suave);font-size:12px;text-align:center;padding:10px 0 30px}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--fondo);color:var(--tinta);font:15px/1.55 var(--f-txt);-webkit-font-smoothing:antialiased}
+button,input,select{font:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
+
+/* Barra superior */
+.barra{position:sticky;top:0;z-index:20;background:var(--azul);color:#fff;padding-top:env(safe-area-inset-top);box-shadow:0 2px 12px rgba(0,38,112,.25)}
+.barra .wrap{display:flex;align-items:center;gap:12px;min-height:60px}
+.marca{display:flex;flex-direction:column;line-height:1.05;margin-right:auto}
+.marca b{font:800 21px var(--f-tit);letter-spacing:-.01em}
+.marca span{font-size:12px;opacity:.8;letter-spacing:.04em}
+.buscar{position:relative;flex:0 1 360px}
+.buscar input{width:100%;border:0;border-radius:999px;padding:11px 16px 11px 40px;background:#fff;color:var(--tinta);outline:none}
+.buscar input:focus{box-shadow:0 0 0 3px rgba(255,255,255,.35)}
+.buscar svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:17px;height:17px;color:var(--gris)}
+@media (max-width:640px){.barra .wrap{flex-wrap:wrap;padding-block:10px}.buscar{flex:1 1 100%}}
+
+/* Encabezado */
+.intro{padding:26px 0 8px}
+.intro h1{margin:0;font:800 clamp(26px,5vw,40px)/1.05 var(--f-tit);letter-spacing:-.02em;text-wrap:balance}
+.intro p{margin:8px 0 0;color:var(--gris);max-width:62ch}
+.kpis{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 6px}
+.kpi{background:var(--blanco);border:1px solid var(--linea);border-radius:14px;padding:10px 16px;min-width:120px}
+.kpi b{display:block;font:800 24px var(--f-tit);color:var(--azul);font-variant-numeric:tabular-nums}
+.kpi span{font-size:12px;color:var(--gris)}
+.pasos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:14px 0 4px}
+.paso{background:var(--blanco);border:1px solid var(--linea);border-radius:14px;padding:12px 14px;display:flex;gap:10px;align-items:flex-start}
+.paso i{flex:0 0 28px;height:28px;border-radius:999px;background:var(--azul);color:#fff;font:700 13px var(--f-txt);font-style:normal;display:grid;place-items:center}
+.paso div{font-size:13.5px;line-height:1.4}
+.paso b{display:block;font-size:14px}
+@media (max-width:720px){
+  .intro{padding-top:18px}
+  .kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+  .kpi{min-width:0;padding:8px 6px;text-align:center;border-radius:12px}
+  .kpi b{font-size:20px}.kpi span{font-size:11px;line-height:1.2;display:block}
+  .pasos{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:16px;gap:8px;margin-left:-16px;margin-right:-16px;padding:0 16px 4px}
+  .paso{flex:0 0 78%;scroll-snap-align:start}
+}
+
+/* Filtros: todo botón en azul; el activo lleva aro blanco + check */
+.filtros{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:18px 0 10px}
+.chip,.sel{border:0;border-radius:999px;background:var(--azul);color:#fff;font-weight:600;font-size:14px;padding:9px 16px;cursor:pointer;transition:background .15s,transform .1s}
+.chip:hover,.sel:hover{background:var(--azul-2)}
+.chip:active{transform:scale(.97)}
+.chip[aria-pressed="true"]{box-shadow:inset 0 0 0 2px #fff,0 0 0 2px var(--azul)}
+.chip[aria-pressed="true"]::before{content:"✓ "}
+.sel{appearance:none;-webkit-appearance:none;padding-right:34px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='white' stroke-width='2'%3E%3Cpath d='M1 1l5 5 5-5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+.sep{flex:1}
+.resultado{display:flex;justify-content:space-between;align-items:center;gap:10px;color:var(--gris);font-size:13.5px;margin:4px 0 12px}
+.limpiar{border:0;background:none;color:var(--azul);font-weight:700;cursor:pointer;padding:4px 0;text-decoration:underline;text-underline-offset:3px}
+
+/* Fichas */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px;padding-bottom:48px}
+.card{background:var(--blanco);border:1px solid var(--linea);border-radius:18px;overflow:hidden;box-shadow:var(--sombra);cursor:pointer;display:flex;flex-direction:column;text-align:left;padding:0;color:inherit;transition:transform .15s,box-shadow .15s}
+.card:hover{transform:translateY(-2px);box-shadow:0 2px 4px rgba(15,23,41,.06),0 16px 32px rgba(15,23,41,.1)}
+.card:focus-visible{outline:3px solid var(--azul);outline-offset:2px}
+.media{position:relative;aspect-ratio:4/3;background:var(--azul-claro);overflow:hidden}
+.media img{width:100%;height:100%;object-fit:cover;display:block}
+.media .sinfoto{position:absolute;inset:0;display:grid;place-items:center;color:var(--azul);font-weight:600;font-size:13px}
+.media .arriba{position:absolute;left:10px;top:10px;right:10px;display:flex;flex-wrap:wrap;gap:6px}
+.media .abajo{position:absolute;left:10px;bottom:10px;right:10px;display:flex;justify-content:space-between;align-items:flex-end;gap:6px}
+.cuerpo{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
+.precio{font:800 23px var(--f-tit);color:var(--azul);letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.precio small{font:600 13px var(--f-txt);color:var(--gris);margin-left:4px}
+.tit{font-weight:700;font-size:15px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.zona{color:var(--gris);font-size:13.5px;display:flex;align-items:center;gap:4px}
+.zona svg{width:14px;height:14px;flex:0 0 14px}
+.specs{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:4px;padding-top:10px;border-top:1px solid var(--linea);font-size:13.5px;color:var(--tinta)}
+.specs span{display:inline-flex;align-items:center;gap:5px}
+.specs svg{width:15px;height:15px;color:var(--azul)}
+.pie-card{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:auto;padding-top:10px}
+
+/* Cápsulas: azul = información; color = estado */
+.cap{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:4px 11px;font-size:12px;font-weight:700;line-height:1.3;white-space:nowrap;background:var(--azul);color:#fff}
+.cap.cod{font-family:var(--f-cod);letter-spacing:.04em;font-size:12px}
+.cap.verde{background:var(--verde-bg);color:var(--verde)}
+.cap.amarillo{background:var(--amarillo-bg);color:var(--amarillo)}
+.cap.rojo{background:var(--rojo-bg);color:var(--rojo)}
+.cap.fotos{background:rgba(0,38,112,.85)}
+.cap .punto{width:7px;height:7px;border-radius:50%;background:currentColor}
+
+.vacio{grid-column:1/-1;background:var(--blanco);border:1px dashed var(--linea);border-radius:18px;padding:40px 20px;text-align:center;color:var(--gris)}
+.vacio b{display:block;color:var(--tinta);font:800 20px var(--f-tit);margin-bottom:4px}
+
+/* Ficha abierta */
+.modal{position:fixed;inset:0;z-index:40;background:rgba(15,23,41,.55);display:flex;justify-content:center;align-items:flex-start;overflow-y:auto;padding:max(16px,env(safe-area-inset-top)) 12px 24px}
+.hoja{background:var(--blanco);width:100%;max-width:880px;border-radius:22px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.25);margin:auto 0}
+.hoja-top{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--azul);color:#fff;padding:12px 16px}
+.hoja-top b{font:700 15px var(--f-cod);letter-spacing:.06em}
+.btn{border:0;border-radius:999px;background:var(--azul);color:#fff;font-weight:700;font-size:14px;padding:10px 18px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;text-decoration:none;transition:background .15s}
+.btn:hover{background:var(--azul-2)}
+.btn.claro{background:rgba(255,255,255,.16)}
+.btn.claro:hover{background:rgba(255,255,255,.28)}
+.btn svg{width:16px;height:16px}
+.visor{position:relative;background:#0b1530;aspect-ratio:16/10;max-height:62vh;width:100%}
+.visor img{width:100%;height:100%;object-fit:contain;display:block}
+.visor .nav{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:999px;border:0;background:var(--azul);color:#fff;font-size:20px;cursor:pointer;display:grid;place-items:center;opacity:.92}
+.visor .nav:hover{opacity:1}
+.visor .prev{left:12px}.visor .next{right:12px}
+.visor .cont{position:absolute;right:12px;bottom:12px}
+.miniaturas{display:flex;gap:8px;overflow-x:auto;padding:10px 16px;background:var(--fondo);border-bottom:1px solid var(--linea)}
+.miniaturas button{flex:0 0 72px;height:54px;border-radius:10px;overflow:hidden;border:2px solid transparent;padding:0;cursor:pointer;background:var(--azul-claro)}
+.miniaturas button[aria-current="true"]{border-color:var(--azul)}
+.miniaturas img{width:100%;height:100%;object-fit:cover;display:block}
+.detalle{padding:18px 18px 22px;display:grid;gap:16px}
+.detalle h2{margin:0;font:800 clamp(20px,3.6vw,26px)/1.2 var(--f-tit);letter-spacing:-.01em;text-wrap:balance}
+.ficha{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.dato{background:var(--fondo);border-radius:14px;padding:12px 14px;display:flex;gap:10px;align-items:center}
+.dato svg{width:20px;height:20px;color:var(--azul);flex:0 0 20px}
+.dato small{display:block;font-size:11.5px;color:var(--gris);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.dato b{font-size:15px}
+.consulta{border-radius:18px;background:var(--azul);color:#fff;padding:18px;display:grid;gap:10px}
+.consulta .cod{font:700 clamp(26px,6vw,34px) var(--f-cod);letter-spacing:.08em;user-select:all}
+.consulta p{margin:0;opacity:.9;font-size:14px}
+.consulta .acciones{display:flex;flex-wrap:wrap;gap:8px}
+.consulta .btn{background:#fff;color:var(--azul)}
+.consulta .btn:hover{background:var(--azul-claro)}
+.alerta{border-radius:14px;padding:12px 14px;font-size:14px;font-weight:600}
+.alerta.rojo{background:var(--rojo-bg);color:var(--rojo)}
+.alerta.amarillo{background:var(--amarillo-bg);color:var(--amarillo)}
+
+footer{background:var(--azul);color:#fff;padding:18px 0 calc(18px + env(safe-area-inset-bottom));font-size:13px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;opacity:.9}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(20px);background:var(--azul);color:#fff;border-radius:999px;padding:10px 18px;font-weight:700;font-size:14px;opacity:0;transition:.2s;z-index:60;pointer-events:none}
+.toast.ver{opacity:1;transform:translateX(-50%)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
-<header><div class="wrap">
-  <h1>Alianzas ALMAX Arequipa</h1>
-  <p>Propiedades compartidas por las inmobiliarias de la red. Solo para agentes.</p>
-</div></header>
-<main class="wrap">
-  <div class="aviso"><b>¿Te interesa una propiedad?</b> Anota su <b>código</b> (por ejemplo AL-HAWXG) y pásaselo al administrador de tu agencia. Él consulta la disponibilidad y coordina la visita.</div>
-  <div class="filtros">
-    <input id="q" type="search" placeholder="Buscar código, distrito o zona" aria-label="Buscar">
-    <select id="op" aria-label="Operación"><option value="">Venta y alquiler</option><option>Venta</option><option>Alquiler</option><option>Anticresis</option></select>
-    <select id="tipo" aria-label="Tipo"><option value="">Todo tipo</option></select>
-    <select id="dist" aria-label="Distrito"><option value="">Todo distrito</option></select>
-    <select id="ag" aria-label="Inmobiliaria"><option value="">Toda la red</option></select>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+  <symbol id="i-cama" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18V7M21 18v-5a3 3 0 0 0-3-3H10v6M3 15h18"/><circle cx="6.5" cy="11.5" r="1.5"/></symbol>
+  <symbol id="i-bano" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16v3a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4v-3zM6 12V5a2 2 0 0 1 4 0M7 19l-1 2M17 19l1 2"/></symbol>
+  <symbol id="i-area" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9V3h6M21 9V3h-6M3 15v6h6M21 15v6h-6"/></symbol>
+  <symbol id="i-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 16V11l2-5h10l2 5v5M3 16h18v3H3zM7 19v2M17 19v2"/><circle cx="7.5" cy="13" r="1"/><circle cx="16.5" cy="13" r="1"/></symbol>
+  <symbol id="i-piso" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V9l8-6 8 6v12M9 21v-6h6v6"/></symbol>
+  <symbol id="i-casa" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-copiar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></symbol>
+  <symbol id="i-lupa" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></symbol>
+</svg>
+
+<header class="barra">
+  <div class="wrap">
+    <div class="marca"><b>Alianzas ALMAX</b><span>Red de inmobiliarias · Arequipa</span></div>
+    <label class="buscar"><svg><use href="#i-lupa"/></svg><input id="q" type="search" placeholder="Buscar código, distrito o zona" aria-label="Buscar" autocomplete="off"></label>
   </div>
-  <div class="cuenta" id="cuenta"></div>
+</header>
+
+<main class="wrap">
+  <section class="intro">
+    <h1>Propiedades de la red</h1>
+    <p>Inmuebles que comparten las inmobiliarias aliadas. Encuentra una opción para tu cliente y consúltala con su código.</p>
+    <div class="kpis" id="kpis"></div>
+    <div class="pasos">
+      <div class="paso"><i>1</i><div><b>Elige la propiedad</b>Filtra por operación, tipo o distrito.</div></div>
+      <div class="paso"><i>2</i><div><b>Copia el código</b>Cada ficha tiene uno, como AL-HAWXG.</div></div>
+      <div class="paso"><i>3</i><div><b>Pásalo a tu administrador</b>Él consulta y coordina la visita.</div></div>
+    </div>
+  </section>
+
+  <div class="filtros" role="group" aria-label="Filtros">
+    <button class="chip" data-op="" aria-pressed="true" type="button">Todas</button>
+    <button class="chip" data-op="Venta" aria-pressed="false" type="button">Venta</button>
+    <button class="chip" data-op="Alquiler" aria-pressed="false" type="button">Alquiler</button>
+    <select class="sel" id="tipo" aria-label="Tipo"><option value="">Todo tipo</option></select>
+    <select class="sel" id="dist" aria-label="Distrito"><option value="">Todo distrito</option></select>
+    <select class="sel" id="ag" aria-label="Inmobiliaria"><option value="">Toda la red</option></select>
+    <span class="sep"></span>
+    <select class="sel" id="orden" aria-label="Ordenar"><option value="rec">Más recientes</option><option value="pmen">Menor precio</option><option value="pmay">Mayor precio</option></select>
+  </div>
+  <div class="resultado"><span id="cuenta"></span><button class="limpiar" id="limpiar" type="button" hidden>Quitar filtros</button></div>
   <div class="grid" id="grid"></div>
 </main>
-<footer class="wrap" id="pie"></footer>
-<div class="modal" id="modal" hidden>
-  <div class="mtop"><div class="wrap"><b id="mtit">Propiedad</b><button class="btn" id="cerrar" type="button">Cerrar</button></div></div>
-  <div class="wrap" id="mbody"></div>
+
+<footer><div class="wrap"><span>Alianzas ALMAX Arequipa · Red privada de inmobiliarias</span><span id="gen"></span></div></footer>
+
+<div class="modal" id="modal" hidden role="dialog" aria-modal="true" aria-labelledby="mcod">
+  <div class="hoja" id="hoja"></div>
 </div>
-<script id="datos" type="application/json">{"generado": "11/11/2026 22:54", "props": [{"codigo": "AL-33DDG", "titulo": "Dúplex 3 niveles con terraza en Cayma, listo para escriturar", "operacion": "Venta", "tipo": "Casa", "moneda": "US$", "precio": 255000, "distrito": "Cayma", "referencia": "Urb. Monte Rosa", "areaTerreno": null, "areaConstruida": 231, "dorm": 3, "banos": 3, "cocheras": 1, "piso": "3 niveles", "estado": "Disponible", "agencia": "Inmo Arequipa", "video": "", "fotos": ["fotos/AL-33DDG-01.jpg", "fotos/AL-33DDG-02.jpg", "fotos/AL-33DDG-03.jpg", "fotos/AL-33DDG-04.jpg", "fotos/AL-33DDG-05.jpg", "fotos/AL-33DDG-06.jpg", "fotos/AL-33DDG-07.jpg", "fotos/AL-33DDG-08.jpg", "fotos/AL-33DDG-09.jpg", "fotos/AL-33DDG-10.jpg"], "masDe30": false, "actualizado": "10/11/2026"}]}</script>
+<div class="toast" id="toast" role="status"></div>
+
+<script id="datos" type="application/json">{"generado": "11/11/2026 23:22", "props": [{"codigo": "AL-33DDG", "titulo": "Dúplex 3 niveles con terraza en Cayma, listo para escriturar", "operacion": "Venta", "tipo": "Casa", "moneda": "US$", "precio": 255000, "distrito": "Cayma", "referencia": "Urb. Monte Rosa", "areaTerreno": null, "areaConstruida": 231, "dorm": 3, "banos": 3, "cocheras": 1, "piso": "3 niveles", "estado": "Disponible", "agencia": "Inmo Arequipa", "video": "", "fotos": ["fotos/AL-33DDG-01.jpg", "fotos/AL-33DDG-02.jpg", "fotos/AL-33DDG-03.jpg", "fotos/AL-33DDG-04.jpg", "fotos/AL-33DDG-05.jpg", "fotos/AL-33DDG-06.jpg", "fotos/AL-33DDG-07.jpg", "fotos/AL-33DDG-08.jpg", "fotos/AL-33DDG-09.jpg", "fotos/AL-33DDG-10.jpg"], "masDe30": false, "actualizado": "10/11/2026"}]}</script>
 <script>
 (function(){
 const D=JSON.parse(document.getElementById("datos").textContent);
 const $=id=>document.getElementById(id);
 const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const fmt=p=>p.precio==null?"Precio a consultar":p.moneda+" "+Number(p.precio).toLocaleString("es-PE",{maximumFractionDigits:0})+(p.operacion==="Alquiler"?" al mes":"");
-const st={q:"",op:"",tipo:"",dist:"",ag:""};
-function llenar(id,campo){const vals=[...new Set(D.props.map(p=>p[campo]).filter(Boolean))].sort();$(id).insertAdjacentHTML("beforeend",vals.map(v=>`<option>${esc(v)}</option>`).join(""))}
+const ico=n=>`<svg aria-hidden="true"><use href="#i-${n}"/></svg>`;
+const TC=3.4;
+const enSoles=p=>p.precio==null?Infinity:(p.moneda==="US$"?p.precio*TC:p.precio);
+const precio=p=>p.precio==null?"Precio a consultar":`${p.moneda} ${Number(p.precio).toLocaleString("es-PE",{maximumFractionDigits:0})}${p.operacion==="Alquiler"?"<small>al mes</small>":""}`;
+const area=p=>p.areaConstruida||p.areaTerreno;
+const nueva=p=>{const [d,m,a]=String(p.actualizado).split("/").map(Number);return a?(Date.now()-new Date(a,m-1,d))/864e5<=7:false};
+const st={q:"",op:"",tipo:"",dist:"",ag:"",orden:"rec"};
+
+/* KPIs */
+const agencias=new Set(D.props.map(p=>p.agencia));
+$("kpis").innerHTML=[[D.props.length,D.props.length===1?"propiedad":"propiedades"],[D.props.filter(p=>p.operacion==="Venta").length,"en venta"],[D.props.filter(p=>p.operacion==="Alquiler").length,"en alquiler"],[agencias.size,agencias.size===1?"inmobiliaria":"inmobiliarias"]].map(([n,t])=>`<div class="kpi"><b>${n}</b><span>${t}</span></div>`).join("");
+$("gen").textContent="Actualizado el "+D.generado;
+
+/* Selects */
+function llenar(id,campo){[...new Set(D.props.map(p=>p[campo]).filter(Boolean))].sort().forEach(v=>$(id).insertAdjacentHTML("beforeend",`<option>${esc(v)}</option>`))}
 llenar("tipo","tipo");llenar("dist","distrito");llenar("ag","agencia");
-["q","op","tipo","dist","ag"].forEach(k=>$(k).addEventListener("input",e=>{st[k]=e.target.value.trim().toLowerCase();pintar()}));
-function pills(p){return `<span class="pill cod">${esc(p.codigo)}</span><span class="pill ag">${esc(p.agencia)}</span>${p.estado==="Reservado"?'<span class="pill res">Reservado</span>':""}${p.masDe30?'<span class="pill vig">Más de 30 días · consultar vigencia</span>':""}${p.video?'<span class="pill">▶ Video</span>':""}`}
+document.querySelectorAll(".chip").forEach(b=>b.addEventListener("click",()=>{st.op=b.dataset.op;document.querySelectorAll(".chip").forEach(x=>x.setAttribute("aria-pressed",x===b));pintar()}));
+["tipo","dist","ag","orden"].forEach(k=>$(k).addEventListener("change",e=>{st[k]=e.target.value;pintar()}));
+$("q").addEventListener("input",e=>{st.q=e.target.value.trim().toLowerCase();pintar()});
+$("limpiar").onclick=()=>{Object.assign(st,{q:"",op:"",tipo:"",dist:"",ag:""});$("q").value="";["tipo","dist","ag"].forEach(k=>$(k).value="");document.querySelectorAll(".chip").forEach((x,i)=>x.setAttribute("aria-pressed",i===0));pintar()};
+
+function estados(p){
+  let h="";
+  if(p.masDe30)h+=`<span class="cap rojo"><span class="punto"></span>Más de 30 días · consultar</span>`;
+  else if(p.estado==="Reservado")h+=`<span class="cap amarillo"><span class="punto"></span>Reservado</span>`;
+  else if(nueva(p))h+=`<span class="cap verde"><span class="punto"></span>Nueva</span>`;
+  else h+=`<span class="cap verde"><span class="punto"></span>Disponible</span>`;
+  return h;
+}
+function specs(p){
+  const s=[];
+  if(area(p))s.push(`<span>${ico("area")}${esc(area(p))} m²</span>`);
+  if(p.dorm)s.push(`<span>${ico("cama")}${esc(p.dorm)} dorm.</span>`);
+  if(p.banos)s.push(`<span>${ico("bano")}${esc(p.banos)} baños</span>`);
+  if(p.cocheras)s.push(`<span>${ico("auto")}${esc(p.cocheras)}</span>`);
+  return s.length?`<div class="specs">${s.join("")}</div>`:"";
+}
 function pintar(){
-  const l=D.props.filter(p=>{
-    if(st.op&&p.operacion.toLowerCase()!==st.op)return false;
-    if(st.tipo&&p.tipo.toLowerCase()!==st.tipo)return false;
-    if(st.dist&&p.distrito.toLowerCase()!==st.dist)return false;
-    if(st.ag&&p.agencia.toLowerCase()!==st.ag)return false;
-    if(st.q&&![p.codigo,p.distrito,p.referencia,p.titulo,p.tipo].join(" ").toLowerCase().includes(st.q))return false;
+  let l=D.props.filter(p=>{
+    if(st.op&&p.operacion!==st.op)return false;
+    if(st.tipo&&p.tipo!==st.tipo)return false;
+    if(st.dist&&p.distrito!==st.dist)return false;
+    if(st.ag&&p.agencia!==st.ag)return false;
+    if(st.q&&![p.codigo,p.distrito,p.referencia,p.titulo,p.tipo,p.agencia].join(" ").toLowerCase().includes(st.q))return false;
     return true});
-  $("cuenta").textContent=l.length+(l.length===1?" propiedad":" propiedades");
-  $("grid").innerHTML=l.length?l.map(p=>`<button class="card" type="button" data-c="${esc(p.codigo)}">
-    <div class="foto">${p.fotos[0]?`<img src="${esc(p.fotos[0])}" alt="" loading="lazy">`:"Sin foto"}${p.fotos.length>1?`<span class="n">${p.fotos.length} fotos</span>`:""}</div>
-    <div class="cuerpo"><div class="precio">${esc(fmt(p))}</div><div class="tit">${esc(p.titulo)}</div>
-    <div class="meta">${esc(p.tipo)} en ${esc(p.operacion.toLowerCase())} · ${esc(p.distrito)}${p.dorm?` · ${esc(p.dorm)} dorm.`:""}${p.areaConstruida||p.areaTerreno?` · ${esc(p.areaConstruida||p.areaTerreno)} m²`:""}</div>
-    <div class="pills">${pills(p)}</div></div></button>`).join(""):`<div class="vacio"><b>No hay propiedades con esos filtros.</b><br>Prueba quitando alguno.</div>`;
+  if(st.orden==="pmen")l=[...l].sort((a,b)=>enSoles(a)-enSoles(b));
+  else if(st.orden==="pmay")l=[...l].sort((a,b)=>enSoles(b)-enSoles(a));
+  const filtrando=st.q||st.op||st.tipo||st.dist||st.ag;
+  $("cuenta").textContent=`${l.length} ${l.length===1?"propiedad":"propiedades"}${filtrando?" con estos filtros":""}`;
+  $("limpiar").hidden=!filtrando;
+  $("grid").innerHTML=l.length?l.map(p=>`<button class="card" type="button" data-c="${esc(p.codigo)}" aria-label="${esc(p.titulo)}, ${esc(p.codigo)}">
+    <div class="media">${p.fotos[0]?`<img src="${esc(p.fotos[0])}" alt="" loading="lazy" decoding="async">`:`<div class="sinfoto">Sin foto</div>`}
+      <div class="arriba"><span class="cap">${esc(p.operacion)}</span>${estados(p)}</div>
+      <div class="abajo"><span class="cap cod">${esc(p.codigo)}</span><span style="display:flex;gap:6px">${p.video?`<span class="cap fotos">${ico("play").replace('aria-hidden="true"','aria-hidden="true" style="width:11px;height:11px"')}Video</span>`:""}${p.fotos.length>1?`<span class="cap fotos">${p.fotos.length} fotos</span>`:""}</span></div>
+    </div>
+    <div class="cuerpo">
+      <div class="precio">${precio(p)}</div>
+      <div class="tit">${esc(p.titulo)}</div>
+      <div class="zona">${ico("pin")}${esc(p.tipo)} · ${esc(p.distrito)}${p.referencia?" · "+esc(p.referencia):""}</div>
+      ${specs(p)}
+      <div class="pie-card"><span class="cap">${esc(p.agencia)}</span></div>
+    </div></button>`).join(""):`<div class="vacio"><b>Sin resultados</b>No hay propiedades con estos filtros. Prueba quitando alguno.</div>`;
 }
 document.addEventListener("click",e=>{const c=e.target.closest("[data-c]");if(c)abrir(c.dataset.c)});
-function dato(k,v){return v||v===0?`<div><small>${k}</small><span>${esc(v)}</span></div>`:""}
+
+/* Ficha abierta */
+let actual=null,idx=0;
+function dato(i,k,v){return v||v===0?`<div class="dato">${ico(i)}<div><small>${k}</small><b>${esc(v)}</b></div></div>`:""}
 function abrir(cod){
-  const p=D.props.find(x=>x.codigo===cod);if(!p)return;
-  $("mtit").textContent=p.codigo;
-  $("mbody").innerHTML=`${p.fotos.length?`<div class="gal">${p.fotos.map(f=>`<img src="${esc(f)}" alt="" loading="lazy">`).join("")}</div>`:`<div class="foto" style="border-radius:10px;margin:14px 0">Sin fotos</div>`}
-  <div class="bloque"><div class="precio" style="font-size:28px">${esc(fmt(p))}</div><div class="tit" style="font-size:17px">${esc(p.titulo)}</div>
-  <div class="meta">${esc(p.distrito)}${p.referencia?" · "+esc(p.referencia):""}</div><div class="pills">${pills(p)}</div>
-  ${p.video?`<a class="btn az" style="margin-top:12px" href="${esc(p.video)}" target="_blank" rel="noopener noreferrer">▶ Ver video de la propiedad</a>`:""}</div>
-  <div class="bloque"><h3>Ficha técnica</h3><div class="datos">${dato("Tipo",p.tipo)}${dato("Operación",p.operacion)}${dato("Área terreno / total",p.areaTerreno&&p.areaTerreno+" m²")}${dato("Área construida",p.areaConstruida&&p.areaConstruida+" m²")}${dato("Dormitorios",p.dorm)}${dato("Baños",p.banos)}${dato("Cocheras",p.cocheras)}${dato("Piso",p.piso)}${dato("Actualizada",p.actualizado)}</div></div>
-  <div class="bloque"><h3>Para consultar</h3><div class="codbig">${esc(p.codigo)}</div>
-  <p class="meta" style="margin:6px 0 12px">Pásale este código al administrador de tu agencia. Él consulta con ${esc(p.agencia)} y coordina la visita.${p.masDe30?" Esta ficha tiene más de 30 días sin actualizar: pide que confirmen si sigue disponible.":""}</p>
-  <button class="btn" type="button" id="copiar">Copiar código</button></div>`;
+  const p=D.props.find(x=>x.codigo===cod);if(!p)return;actual=p;idx=0;
+  $("hoja").innerHTML=`
+  <div class="hoja-top"><b id="mcod">${esc(p.codigo)}</b><button class="btn claro" type="button" id="cerrar">Cerrar ✕</button></div>
+  ${p.fotos.length?`<div class="visor"><img id="vimg" src="${esc(p.fotos[0])}" alt="Foto 1 de ${p.fotos.length}">
+    ${p.fotos.length>1?`<button class="nav prev" type="button" id="prev" aria-label="Foto anterior">‹</button><button class="nav next" type="button" id="next" aria-label="Foto siguiente">›</button><span class="cap cont" id="vcont">1 / ${p.fotos.length}</span>`:""}</div>
+    ${p.fotos.length>1?`<div class="miniaturas">${p.fotos.map((f,i)=>`<button type="button" data-i="${i}" aria-current="${i===0}" aria-label="Ver foto ${i+1}"><img src="${esc(f)}" alt="" loading="lazy"></button>`).join("")}</div>`:""}`:""}
+  <div class="detalle">
+    <div style="display:flex;flex-wrap:wrap;gap:6px"><span class="cap">${esc(p.operacion)}</span><span class="cap">${esc(p.tipo)}</span>${estados(p)}<span class="cap">${esc(p.agencia)}</span></div>
+    <div><div class="precio" style="font-size:30px">${precio(p)}</div><h2>${esc(p.titulo)}</h2><div class="zona" style="margin-top:6px">${ico("pin")}${esc(p.distrito)}${p.referencia?" · "+esc(p.referencia):""}</div></div>
+    ${p.masDe30?`<div class="alerta rojo">Esta ficha tiene más de 30 días sin actualizar. Pide que confirmen si sigue disponible.</div>`:p.estado==="Reservado"?`<div class="alerta amarillo">Esta propiedad está reservada. Consulta si aún se puede visitar.</div>`:""}
+    ${p.video?`<div><a class="btn" href="${esc(p.video)}" target="_blank" rel="noopener noreferrer">${ico("play")}Ver video de la propiedad</a></div>`:""}
+    <div class="ficha">${dato("casa","Tipo",p.tipo)}${dato("area","Área terreno / total",p.areaTerreno&&p.areaTerreno+" m²")}${dato("area","Área construida",p.areaConstruida&&p.areaConstruida+" m²")}${dato("cama","Dormitorios",p.dorm)}${dato("bano","Baños",p.banos)}${dato("auto","Cocheras",p.cocheras)}${dato("piso","Piso",p.piso)}${dato("cal","Actualizada",p.actualizado)}</div>
+    <div class="consulta"><p>Código para consultar</p><div class="cod">${esc(p.codigo)}</div>
+      <p>Pásale este código al administrador de tu agencia. Él consulta con ${esc(p.agencia)} y coordina la visita.</p>
+      <div class="acciones"><button class="btn" type="button" id="copiar">${ico("copiar")}Copiar código</button><button class="btn" type="button" id="enlace">${ico("link")}Copiar enlace</button></div></div>
+  </div>`;
   $("modal").hidden=false;document.body.style.overflow="hidden";$("modal").scrollTop=0;
-  $("copiar").onclick=async()=>{try{await navigator.clipboard.writeText(p.codigo);$("copiar").textContent="Copiado"}catch{$("copiar").textContent="Mantén presionado el código"}};
+  $("cerrar").onclick=cerrar;
+  if($("prev")){$("prev").onclick=()=>ver(idx-1);$("next").onclick=()=>ver(idx+1)}
+  document.querySelectorAll(".miniaturas button").forEach(b=>b.onclick=()=>ver(+b.dataset.i));
+  $("copiar").onclick=()=>copiar(p.codigo,"Código copiado");
+  $("enlace").onclick=()=>copiar(location.origin+location.pathname+"#"+p.codigo,"Enlace copiado");
   try{history.replaceState(null,"","#"+p.codigo)}catch{}
+  $("cerrar").focus();
 }
-function cerrar(){$("modal").hidden=true;document.body.style.overflow="";try{history.replaceState(null,"",location.pathname)}catch{}}
-$("cerrar").onclick=cerrar;document.addEventListener("keydown",e=>{if(e.key==="Escape")cerrar()});
-$("pie").textContent="Actualizado el "+D.generado+" · Red privada Alianzas ALMAX Arequipa";
+function ver(i){const n=actual.fotos.length;idx=(i+n)%n;$("vimg").src=actual.fotos[idx];$("vimg").alt=`Foto ${idx+1} de ${n}`;if($("vcont"))$("vcont").textContent=`${idx+1} / ${n}`;document.querySelectorAll(".miniaturas button").forEach((b,j)=>{b.setAttribute("aria-current",j===idx);if(j===idx)b.scrollIntoView({block:"nearest",inline:"nearest"})})}
+function cerrar(){$("modal").hidden=true;document.body.style.overflow="";actual=null;try{history.replaceState(null,"",location.pathname)}catch{}}
+$("modal").addEventListener("click",e=>{if(e.target.id==="modal")cerrar()});
+document.addEventListener("keydown",e=>{if($("modal").hidden)return;if(e.key==="Escape")cerrar();if(actual&&actual.fotos.length>1){if(e.key==="ArrowLeft")ver(idx-1);if(e.key==="ArrowRight")ver(idx+1)}});
+let tx=null;$("modal").addEventListener("touchstart",e=>{if(e.target.closest(".visor"))tx=e.touches[0].clientX},{passive:true});
+$("modal").addEventListener("touchend",e=>{if(tx==null)return;const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>40)ver(idx+(dx<0?1:-1));tx=null});
+async function copiar(t,msg){try{await navigator.clipboard.writeText(t);toast(msg)}catch{toast("Mantén presionado para copiar: "+t)}}
+let tt;function toast(m){const e=$("toast");e.textContent=m;e.classList.add("ver");clearTimeout(tt);tt=setTimeout(()=>e.classList.remove("ver"),2200)}
+
 pintar();
-const h=location.hash.slice(1);if(h)abrir(h);
+const h=decodeURIComponent(location.hash.slice(1));if(h)abrir(h);
 })();
 </script>
 </body>
